@@ -7,7 +7,19 @@
     <div class="my-4">
       <%= simple_format(@post.body) %>
     </div>
-
-    <%= link_to 'Back', posts_path, class: 'btn btn-light' %>
+    <div class="card my-1">
+      <div class="card-body">
+        <h4>Comments</h4>
+          <%= form_with(model: [@post, @post.comments.build]) do |f| %>
+            <div class="form-group">
+              <%= f.label 'New comment' %>
+              <%= f.text_area :body, class: 'form-control' %>
+            </div>
+            <%= f.submit 'Submit', class: 'btn btn-primary btn-sm mt-2' %>
+          <% end %>
+      </div>
+      <%= render @post.comments %>
+      <%= link_to 'Back', posts_path, class: 'btn btn-light' %>
+    </div>
   </div>
 </div>
